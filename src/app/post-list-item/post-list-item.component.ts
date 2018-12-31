@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-post-list-item',
@@ -7,18 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostListItemComponent implements OnInit {
 
-  postTitle = 'Ta mère en string de guerre !!!';
-  postContent = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-  postLoveIts = 0;
-  postDontLoveIts = 0;
-  postDate = '26/12/2018 à 20:32';
+  @Input() postTitle: string;
+  @Input() postContent: string;
+  @Input() postLoveIts: number;
+  @Input() postDontLoveIts: number;
+  @Input() postDate: Date;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  getContent() {
+  getPostTitle() {
+    return this.postTitle;
+  }
+
+  getPostContent() {
     return this.postContent;
   }
 
@@ -34,6 +38,15 @@ export class PostListItemComponent implements OnInit {
     return this.postDate
   }
 
+  getItemShadowColor() {
+    if(this.postLoveIts > this.postDontLoveIts) {
+      return '0px 0px 10px #28a745';
+    }
+    if(this.postDontLoveIts > this.postLoveIts) {
+      return '0px 0px 10px #dc3545';
+    }
+  }
+
   increasePostLoveIts() {
     this.postLoveIts ++;
     if (this.postDontLoveIts > 0) {
@@ -47,5 +60,4 @@ export class PostListItemComponent implements OnInit {
       this.postLoveIts --;
     }
   }
-
 }
