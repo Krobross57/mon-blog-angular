@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Post } from '../app.component';
 
 @Component({
   selector: 'app-post-list-item',
@@ -7,11 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PostListItemComponent implements OnInit {
 
-  @Input() postTitle: string;
-  @Input() postContent: string;
-  @Input() postLoveIts: number;
-  @Input() postDontLoveIts: number;
-  @Input() postDate: Date;
+  @Input() post: Post;
 
   constructor() { }
 
@@ -19,45 +16,45 @@ export class PostListItemComponent implements OnInit {
   }
 
   getPostTitle() {
-    return this.postTitle;
+    return this.post.title;
   }
 
   getPostContent() {
-    return this.postContent;
+    return this.post.content;
   }
 
   getPostLoveIts() {
-    return this.postLoveIts;
+    return this.post.loveIts;
   }
 
   getPostDontLoveIts() {
-    return this.postDontLoveIts;
+    return this.post.dontLoveIts;
   }
 
   getPostDate() {
-    return this.postDate
+    return this.post.date_creation;
   }
 
   getItemShadowColor() {
-    if(this.postLoveIts > this.postDontLoveIts) {
+    if(this.post.loveIts > this.post.dontLoveIts) {
       return '0px 0px 10px #28a745';
     }
-    if(this.postDontLoveIts > this.postLoveIts) {
+    if(this.post.dontLoveIts > this.post.loveIts) {
       return '0px 0px 10px #dc3545';
     }
   }
 
   increasePostLoveIts() {
-    this.postLoveIts ++;
-    if (this.postDontLoveIts > 0) {
-      this.postDontLoveIts --;
+    this.post.loveIts ++;
+    if (this.post.dontLoveIts > 0) {
+      this.post.dontLoveIts --;
     }
   }
 
   increasePostDontLoveIts() {
-    this.postDontLoveIts ++;
-    if (this.postLoveIts > 0) {
-      this.postLoveIts --;
+    this.post.dontLoveIts ++;
+    if (this.post.loveIts > 0) {
+      this.post.loveIts --;
     }
   }
 }

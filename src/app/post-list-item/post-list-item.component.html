@@ -1,10 +1,10 @@
 <li [ngClass]="{'list-group-item': true,
-                'list-group-item-success': postLoveIts > postDontLoveIts,
-                'list-group-item-danger': postDontLoveIts > postLoveIts }"
+                'list-group-item-success': post.loveIts > post.dontLoveIts,
+                'list-group-item-danger': post.dontLoveIts > post.loveIts }"
     [ngStyle]="{'box-shadow': getItemShadowColor()}"
      class="mb-4">
   <h2>{{ getPostTitle() }}</h2>
-  <p>{{ getPostDate() }}</p>
+  <p>Le {{ post.date_creation | date: 'dd/MM/yyyy' }} à {{ post.date_creation | date: 'hh:mm' }}</p>
   <p style="text-align: justify;">{{ getPostContent() }}</p>
   <p><i class="fa fa-thumbs-o-up mr-2" aria-hidden="true"></i>{{ getPostLoveIts() }}</p>
   <p><i class="fa fa-thumbs-o-down mr-2" aria-hidden="true"></i>{{ getPostDontLoveIts() }}</p>
