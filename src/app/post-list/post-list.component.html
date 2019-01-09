@@ -1,6 +1,29 @@
+<h1 class="mt-3 mb-5" style="border: 1px solid black;padding-bottom: 5px; text-align: center;">LISTE DES POSTS</h1>
 <ul class="list-group">
-  <app-post-list-item
-  *ngFor="let post of posts"
-  [post]="post">
-  </app-post-list-item>
+  <li *ngFor="let post of posts; let i = index"
+  [ngClass]="{'list-group-item': true,
+              'list-group-item-success': post.loveIts > post.dontLoveIts,
+              'list-group-item-danger': post.loveIts < post.dontLoveIts}"
+  class="mb-4">
+    <h2>{{ post.title }}</h2>
+    <p>Le {{ post.date_creation | date: 'dd/MM/yyyy' }} à {{ post.date_creation | date: 'HH:mm' }}</p>
+    <p style="text-align: justify;">{{ post.content }}</p>
+    <p><i class="fa fa-thumbs-o-up mr-2" aria-hidden="true"></i>{{ post.loveIts }}</p>
+    <button class="btn btn-outline-success" (click)="onLoveItsPlus(i)">
+      <i class="fa fa-thumbs-o-up  mr-2" aria-hidden="true"></i>
+      Love it !
+    </button>
+    <button class="btn btn-outline-danger ml-3" (click)="onDontLoveItsPlus(i)">
+      <i class="fa fa-thumbs-o-down mr-2" aria-hidden="true"></i>
+      Don't love it !
+    </button>
+    <button class="btn btn-outline-primary ml-3" (click)="onViewPost(i)">
+      <i class="fa fa-eye mr-2" aria-hidden="true"></i>
+      Afficher le post
+    </button>
+    <button class="btn btn-outline-danger ml-3 pull-right" (click)="onDeletePost(i)">
+      <i class="fa fa-times mr-2" aria-hidden="true"></i>
+      Supprimer le post
+    </button>
+  </li>
 </ul>

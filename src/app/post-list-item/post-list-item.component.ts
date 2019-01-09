@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Post } from '../app.component';
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../models/Post.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-post-list-item',
@@ -8,53 +10,21 @@ import { Post } from '../app.component';
 })
 export class PostListItemComponent implements OnInit {
 
-  @Input() post: Post;
+  post: Post;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private postsService: PostsService, private router: Router) { }
 
   ngOnInit() {
+    this.post = new Post('', '', 0, 0, null);
+    const id = this.route.snapshot.params['id'];
+    this.postsService.getSinglePost(+id).then(
+      (post: Post) => {
+        this.post = post;
+      }
+    );
   }
 
-  getPostTitle() {
-    return this.post.title;
-  }
-
-  getPostContent() {
-    return this.post.content;
-  }
-
-  getPostLoveIts() {
-    return this.post.loveIts;
-  }
-
-  getPostDontLoveIts() {
-    return this.post.dontLoveIts;
-  }
-
-  getPostDate() {
-    return this.post.date_creation;
-  }
-
-  getItemShadowColor() {
-    if(this.post.loveIts > this.post.dontLoveIts) {
-      return '0px 0px 10px #28a745';
-    }
-    if(this.post.dontLoveIts > this.post.loveIts) {
-      return '0px 0px 10px #dc3545';
-    }
-  }
-
-  increasePostLoveIts() {
-    this.post.loveIts ++;
-    if (this.post.dontLoveIts > 0) {
-      this.post.dontLoveIts --;
-    }
-  }
-
-  increasePostDontLoveIts() {
-    this.post.dontLoveIts ++;
-    if (this.post.loveIts > 0) {
-      this.post.loveIts --;
-    }
+  onBack() {
+    this.router.navigate(['/posts']);
   }
 }

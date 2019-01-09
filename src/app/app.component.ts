@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface Post {
-  title: string;
-  content: string;
-  loveIts: number;
-  dontLoveIts: number;
-  date_creation: Date;
-}
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -15,29 +8,15 @@ export interface Post {
 })
 export class AppComponent {
 
-  posts: Array<Post> = [
-    {
-      title: 'Mon premier post',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      loveIts: 0,
-      dontLoveIts: 0,
-      date_creation: new Date()
-    },
-    {
-      title: 'Mon deuxième post',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      loveIts: 0,
-      dontLoveIts: 0,
-      date_creation: new Date()
-    },
-    {
-      title: 'Mon troisième post',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      loveIts: 0,
-      dontLoveIts: 0,
-      date_creation: new Date()
-    },
-  ];
-
-
+  constructor() {
+    var config = {
+      apiKey: "AIzaSyAVyRGLC-DAtzxX0ldMkKIgm3EOawaw7Aw",
+      authDomain: "mon-blog-angular-2a791.firebaseapp.com",
+      databaseURL: "https://mon-blog-angular-2a791.firebaseio.com",
+      projectId: "mon-blog-angular-2a791",
+      storageBucket: "mon-blog-angular-2a791.appspot.com",
+      messagingSenderId: "348046783029"
+    };
+    firebase.initializeApp(config);
+}
 }
